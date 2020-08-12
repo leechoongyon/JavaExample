@@ -16,7 +16,7 @@ public class MaskingUtils {
     /**
      * ip 를 마스킹.
      * ip 3번째 자리를 마스킹 한다.
-     * @Todo 추후 version6 ip 마스킹도 만들기
+     * @Todo 추후 version6 ip 마스킹도 만들
      * @param ip
      * @return
      */
