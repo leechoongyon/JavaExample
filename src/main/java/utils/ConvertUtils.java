@@ -22,7 +22,7 @@ public class ConvertUtils {
             StringBuilder sb = new StringBuilder();
             String line = "";
             while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line);
             }
             return sb.toString();
         } catch (Throwable th) {
