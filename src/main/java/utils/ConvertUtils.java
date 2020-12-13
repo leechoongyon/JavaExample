@@ -1,11 +1,14 @@
 package utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class ConvertUtils {
@@ -29,5 +32,26 @@ public class ConvertUtils {
             log.error(th.getMessage(), th);
             throw new RuntimeException(th);
         }
+    }
+
+
+    /**
+     * delimiter 를 기준으로 str 을 map 으로 변환
+     * @param str
+     * @param delimiter
+     * @return
+     */
+    public static Optional<Map<String, String>> stringToMap(String str, String delimiter) {
+        Map<String, String> map = new HashMap<>();
+        if (StringUtils.isEmpty(str)) {
+            return Optional.empty();
+        }
+
+        String[] ketValues = str.split(delimiter);
+        for (String keyValue : ketValues) {
+            String[] tmp = keyValue.split("=");
+            map.put(tmp[0], tmp[1]);
+        }
+        return Optional.ofNullable(map);
     }
 }
