@@ -18,4 +18,11 @@ public class ConvertUtilsTest {
 
         Assert.assertThat(ConvertUtils.convertInputStreamToString(is), is(text));
     }
+
+    @Test
+    public void stringToMapTest() {
+        String str = "kkk=qqq,aaa=bbb";
+        Assert.assertThat(ConvertUtils.stringToMap(str, ",").get().size(), is(2));
+        Assert.assertThat(ConvertUtils.stringToMap(str, ",").get().get("kkk"), is("qqq"));
+    }
 }
