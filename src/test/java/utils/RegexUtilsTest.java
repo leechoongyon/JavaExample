@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 public class RegexUtilsTest {
 
     @Test
-    public void isNuberTest () throws Exception {
+    public void isNumberTest () throws Exception {
         String s = "12345";
         Assert.assertThat(true, is(RegexUtils.isNumber(s)));
 
