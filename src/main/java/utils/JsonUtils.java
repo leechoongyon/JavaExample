@@ -14,17 +14,17 @@ public class JsonUtils {
     /**
      * jsonObject --> map 으로 변경
      * JSONObject 에 JSONArray 없어야 햠.
-     * @param jsonObject
+     * @param obj
      * @return
      */
-    public static Map<String, Object> getMapFromJSONObject(JSONObject jsonObject) {
-        if (ObjectUtils.isEmpty(jsonObject)) {
-            log.error("bad request jsonObject : {}", jsonObject);
-            throw new IllegalArgumentException(String.format("bad request jsonObject %s", jsonObject));
+    public static Map<String, Object> getMapFromJSONObject(JSONObject obj) {
+        if (ObjectUtils.isEmpty(obj)) {
+            log.error("BAD REQUEST obj : {}", obj);
+            throw new IllegalArgumentException(String.format("BAD REQUEST obj %s", obj));
         }
 
         try {
-            return new ObjectMapper().readValue(jsonObject.toJSONString(), Map.class);
+            return new ObjectMapper().readValue(obj.toJSONString(), Map.class);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e);
@@ -34,16 +34,16 @@ public class JsonUtils {
     /**
      * jsonStr --> map 으로 변경
      * JSONObject 에 JSONArray 없어 햠.
-     * @param jsonStr
+     * @param str
      * @return
      */
-    public static Map<String, Object> getMapFromJSONObject(String jsonStr) {
-        if (StringUtils.isEmpty(jsonStr)) {
-            log.error("bad request jsonObject : {}", jsonStr);
-            throw new IllegalArgumentException(String.format("bad request jsonObject %s", jsonStr));
+    public static Map<String, Object> getMapFromJSONObject(String str) {
+        if (StringUtils.isEmpty(str)) {
+            log.error("BAD REQUEST obj : {}", str);
+            throw new IllegalArgumentException(String.format("BAD REQUEST obj %s", str));
         }
         try {
-            return new ObjectMapper().readValue(jsonStr, Map.class);
+            return new ObjectMapper().readValue(str, Map.class);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e);
