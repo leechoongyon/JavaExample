@@ -2,11 +2,16 @@ package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class JsonUtils {
@@ -48,5 +53,17 @@ public class JsonUtils {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e);
         }
+    }
+
+    public static Optional<List<Map<String, Object>>> getListMapFromJsonArray(JSONArray jsonArray) {
+        if (ObjectUtils.isEmpty(jsonArray)) {
+            log.error("jsonArray is null.");
+            throw new IllegalArgumentException("jsonArray is null");
+        }
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (Object jsonObject : jsonArray) {
+            list.add(getMapFromJSONObject((JSONObject) jsonObject));
+        }
+        return Optional.ofNullable(list);
     }
 }
