@@ -42,8 +42,7 @@ public class JsonUtilsTest {
 
     @Test
     public void getListMapFromJsonArray_테스트() throws Exception {
-        Optional<List<Map<String, Object>>> optList = JsonUtils.getListMapFromJsonArray(jsonArray);
-        List<Map<String, Object>> list = optList.get();
+        List<Map<String, Object>> list = JsonUtils.getListMapFromJsonArray(jsonArray);
         Assert.assertThat(list.size(), is(2));
         Assert.assertThat(list.get(0).get("key"), is("key test"));
         Assert.assertThat(list.get(0).get("value"), is("value test"));

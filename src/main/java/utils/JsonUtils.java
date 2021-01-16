@@ -55,7 +55,13 @@ public class JsonUtils {
         }
     }
 
-    public static Optional<List<Map<String, Object>>> getListMapFromJsonArray(JSONArray jsonArray) {
+    /**
+     * json array 를 list map 으로 변경.
+     *
+     * @param jsonArray
+     * @return 값이 있으면 list map, 없으면 list 빈 값 return
+     */
+    public static List<Map<String, Object>> getListMapFromJsonArray(JSONArray jsonArray) {
         if (ObjectUtils.isEmpty(jsonArray)) {
             log.error("jsonArray is null.");
             throw new IllegalArgumentException("jsonArray is null");
@@ -64,6 +70,6 @@ public class JsonUtils {
         for (Object jsonObject : jsonArray) {
             list.add(getMapFromJSONObject((JSONObject) jsonObject));
         }
-        return Optional.ofNullable(list);
+        return list;
     }
 }
