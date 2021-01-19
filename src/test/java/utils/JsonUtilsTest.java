@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 
@@ -35,7 +34,7 @@ public class JsonUtilsTest {
 
     @Test
     public void getMapFromJsonObject_string_입력값_테스트() throws Exception {
-        Map<String, Object> map = JsonUtils.getMapFromJSONObject(jsonObject.toString());
+        Map<String, Object> map = JsonUtils.getMapFromJsonString(jsonObject.toString());
         Assert.assertThat(map.get("key"), is("key test"));
         Assert.assertThat(map.get("value"), is("value test"));
     }
@@ -46,5 +45,55 @@ public class JsonUtilsTest {
         Assert.assertThat(list.size(), is(2));
         Assert.assertThat(list.get(0).get("key"), is("key test"));
         Assert.assertThat(list.get(0).get("value"), is("value test"));
+    }
+
+    @Test
+    public void getJsonStringFromJavaObjectTest() throws Exception {
+        String jsonStr = JsonUtils.getJsonStringFromJavaObj(new Member("test", 10, new Address("test address")));
+        Assert.assertNotNull(jsonStr);
+    }
+
+    @Test
+    public void getJSONObjectFromJsonStringTest() throws Exception {
+        String jsonString = JsonUtils.getJsonStringFromJavaObj(new Member("test", 10, new Address("test address")));
+        JSONObject jsonObject = JsonUtils.getJSONObjectFromJsonString(jsonString);
+        Assert.assertThat(jsonObject.get("name"), is("test"));
+        Assert.assertThat(jsonObject.get("age"), is(10L));
+    }
+
+    static class Member {
+        private String name;
+        private int age;
+        private Address address;
+
+        public Member(String name, int age, Address address) {
+            this.name = name;
+            this.age = age;
+            this.address = address;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public Address getAddress() {
+            return address;
+        }
+    }
+
+    static class Address {
+        private String addr;
+
+        public Address(String addr) {
+            this.addr = addr;
+        }
+
+        public String getAddr() {
+            return addr;
+        }
     }
 }

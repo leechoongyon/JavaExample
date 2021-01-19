@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
@@ -42,7 +43,7 @@ public class JsonUtils {
      * @param str
      * @return
      */
-    public static Map<String, Object> getMapFromJSONObject(String str) {
+    public static Map<String, Object> getMapFromJsonString(String str) {
         if (StringUtils.isEmpty(str)) {
             log.error("BAD REQUEST obj : {}", str);
             throw new IllegalArgumentException(String.format("BAD REQUEST obj %s", str));
@@ -71,5 +72,38 @@ public class JsonUtils {
             list.add(getMapFromJSONObject((JSONObject) jsonObject));
         }
         return list;
+    }
+
+
+    /**
+     * java object --> jsonObject string
+     * 객체안의 객체도 표현 가능
+     * @warnings 주의사항으로는 java object getter 가 구현되있어야 함.
+     * @param object
+     * @return
+     */
+    public static String getJsonStringFromJavaObj(Object object) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(object);
+        } catch (Throwable th) {
+            log.error(th.getMessage(), th);
+            throw new RuntimeException(th);
+        }
+    }
+
+    /**
+     * json string --> JSONObject 변환
+     * @param jsonString
+     * @return
+     */
+    public static JSONObject getJSONObjectFromJsonString(String jsonString) {
+        try {
+            JSONParser parser = new JSONParser();
+            return (JSONObject) parser.parse(jsonString);
+        } catch (Throwable th) {
+            log.error(th.getMessage(), th);
+            throw new RuntimeException(th);
+        }
     }
 }
