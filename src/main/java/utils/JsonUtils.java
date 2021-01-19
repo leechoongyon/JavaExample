@@ -28,7 +28,7 @@ public class JsonUtils {
             log.error("BAD REQUEST obj : {}", obj);
             throw new IllegalArgumentException(String.format("BAD REQUEST obj %s", obj));
         }
-
+        
         try {
             return new ObjectMapper().readValue(obj.toJSONString(), Map.class);
         } catch (Exception e) {
@@ -83,6 +83,10 @@ public class JsonUtils {
      * @return
      */
     public static String getJsonStringFromJavaObj(Object object) {
+        if (ObjectUtils.isEmpty(object)) {
+            log.error("object is empty. object : {}", object);
+            throw new IllegalArgumentException(String.format("object is empty. object : %s", object));
+        }
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(object);
@@ -98,6 +102,10 @@ public class JsonUtils {
      * @return
      */
     public static JSONObject getJSONObjectFromJsonString(String jsonString) {
+        if (StringUtils.isEmpty(jsonString)) {
+            log.error("jsonString is empty");
+            throw new IllegalArgumentException("jsonString is empty.");
+        }
         try {
             JSONParser parser = new JSONParser();
             return (JSONObject) parser.parse(jsonString);
