@@ -28,7 +28,7 @@ public class JsonUtils {
             log.error("BAD REQUEST obj : {}", obj);
             throw new IllegalArgumentException(String.format("BAD REQUEST obj %s", obj));
         }
-        
+
         try {
             return new ObjectMapper().readValue(obj.toJSONString(), Map.class);
         } catch (Exception e) {
