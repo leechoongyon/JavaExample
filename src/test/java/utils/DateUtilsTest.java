@@ -15,4 +15,11 @@ public class DateUtilsTest {
     public void getCurrentTimeStampTest() {
         Assert.assertNotNull(DateUtils.getCurrentTimeStamp());
     }
+
+    @Test
+    public void convertDateFormatTest() {
+        Assert.assertThat(DateUtils.convertDateFormat("2021-01-01", "yyyy-MM-dd", "yyyyMMdd"), is("20210101"));
+        Assert.assertThat(DateUtils.convertDateFormat("20210101", "yyyyMMdd", "yyyy-MM-dd"), is("2021-01-01"));
+    }
+
 }
