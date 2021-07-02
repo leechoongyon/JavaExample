@@ -3,6 +3,14 @@ package utils;
 public class StringUtils {
 
     /**
+     * Mock static method test 용
+     * @return
+     */
+    public static String helloWorld() {
+        return "Hello World...";
+    }
+
+    /**
      * 반각문자 --> 전각문자 변환
      *
      * @param s

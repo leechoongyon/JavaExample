@@ -28,11 +28,12 @@ public class StringUtilsTest {
         // 반각문자 공백이기에 1bytes
         Assert.assertThat(s.getBytes(Charset.forName("euc-kr")).length, is(1));
 
-        String toFullWidthCharacter = StringUtils.toFullWidthCharacter(s);
+        String fullWidthCharacter = StringUtils.toFullWidthCharacter(s);
         // 전각문자 공백이기에 2bytes
-        Assert.assertThat(toFullWidthCharacter.getBytes("euc-kr").length, is(2));
+        Assert.assertThat(fullWidthCharacter.getBytes("euc-kr").length, is(2));
 
-        String halfWidthCharacter = StringUtils.toHalfWidthCharacter(toFullWidthCharacter);
+        String halfWidthCharacter = StringUtils.toHalfWidthCharacter(fullWidthCharacter);
+        // 반각문자 bytes 이기에 byte 길이 1
         Assert.assertThat(halfWidthCharacter.getBytes("euc-kr").length, is(1));
     }
 }
